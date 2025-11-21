@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu primeiro programa...</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+<body>
+   <h1 id="h1"></h1>
+</body>
+<script>
+    const teste = window.confirm("Minha primeira mensagem")
+    const h1 = document.getElementById("h1")
+    if (teste = true){
+        h1.innerHTML = "show meu peixe"
+    } else {
+        h1.innerHTML = "vai ser melhor Dr."
+    }
+</script>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Iniciando estudos de DOM</h1>
+    <p>Aqui vai o resultado</p>
+    <p id="p">Aprendendo a usar o <strong>DOM</strong> em JS.</p>
+    <div>Clique em mim</div>
+    <script>
+        const p1 = window.document.querySelector("p")
+        
+        window.document.write(`lá ta assim : ${p1.innerHTML} `)
+    </script>
+</body>
+</html>
