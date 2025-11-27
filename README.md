@@ -1,89 +1,59 @@
-Atividade Formação TS
-Estrutura:
-• Atividade Formação TS/
+# Estudos em JavaScript e TypeScript
 
-estrutura.py
-Estrutura:
-• estrutura.py
+Colecao de exercicios e desafios resolvidos durante cursos e trilhas na DIO e no Curso em Video. Cada pasta e independente e pode ser explorada separadamente.
 
-README.md
-Estrutura:
-• README.md
+## Estrutura
+- `Atividade Formacao TS/` – inicio de um app em TypeScript (DIO Banking) com `ts-node-dev`, configurado via `tsconfig.json`.
+- `Atividades JS ES6/` – exemplos de async/await e `fetch` consumindo `data.json` direto no navegador via `index.html`.
+- `Atividades DIO AULAS/`
+  - `Desafio1/` ranking de heroi por XP.
+  - `Desafio2/` calculo de nivel por saldo de vitorias.
+  - `Desafio3/` classes basicas de personagem e ataque.
+- `Atividades DIO REFINANDO/` – sete desafios com entrada via `gets/print` da plataforma:
+  - `Gerenciamento de Itens Magicos/`
+  - `Pontos de Experiencia/`
+  - `Combinando Nomes de Pokemons/`
+  - `Capturando Pokemons Iniciais/`
+  - `Coleta de Tesouros no Dungeon/`
+  - `Desafio do Heroi/`
+  - `Geracao de Biomas em um Mundo de Blocos/`
+- `Atividades CURSO EM VIDEO JS/`
+  - `aula #04` a `aula #10`: exercicios rapidos de sintaxe JS/HTML.
+  - `exercicio #1` a `exercicio #4`: praticas completas com HTML/CSS/JS.
 
-Atividades DIO AULAS
-Esta pasta reúne as atividades realizadas após a finalização de cada bloco do curso.
+## Como executar
+### TypeScript (DIO Banking)
+```bash
+cd Atividade Formacao TS
+npm install
+npm run dev
+```
 
-Estrutura:
-• Atividades DIO AULAS/Desafio1/index.js
-• Atividades DIO AULAS/Desafio2/index.js
-• Atividades DIO AULAS/Desafio3/index.js
+### Exemplos ES6 no navegador
+Servir estaticamente para o `fetch` funcionar:
+```bash
+cd Atividades JS ES6
+python3 -m http.server 3000   # ou npx http-server .
+# depois abra http://localhost:3000/index.html
+```
 
-Atividades DIO REFINANDO
-Pasta dedicada aos desafios de lógica do módulo “Refinando sua técnica”.
+### Desafios em Node (AULAS)
+Rode direto com Node:
+```bash
+node Atividades DIO AULAS/Desafio1/index.js
+node Atividades DIO AULAS/Desafio2/index.js
+node Atividades DIO AULAS/Desafio3/index.js
+```
 
-Estrutura:
-• Atividades DIO REFINANDO/Gerenciamento de Itens Mágicos/Descrição.md
-• Atividades DIO REFINANDO/Gerenciamento de Itens Mágicos/index.js
+### Desafios DIO REFINANDO
+Os arquivos usam `gets/print` (fornecidos na plataforma DIO). Para testar localmente, substitua por leituras de `stdin`:
+```js
+const fs = require("fs");
+const entradas = fs.readFileSync(0, "utf8").trim().split("\n");
+```
+e adapte as saidas para `console.log`.
 
-• Atividades DIO REFINANDO/Pontos de Experiencia/Descrição.md
-• Atividades DIO REFINANDO/Pontos de Experiencia/index.js
-
-• Atividades DIO REFINANDO/Combinando Nomes de Pokémons/Descrição.md
-• Atividades DIO REFINANDO/Combinando Nomes de Pokémons/index.js
-
-• Atividades DIO REFINANDO/Capturando Pokémons Iniciais/Descrição.md
-• Atividades DIO REFINANDO/Capturando Pokémons Iniciais/index.js
-
-• Atividades DIO REFINANDO/Coleta de Tesouros no Dungeon/Descrição.md
-• Atividades DIO REFINANDO/Coleta de Tesouros no Dungeon/index.js
-
-• Atividades DIO REFINANDO/Desafio do Heroi/Descrição.md
-• Atividades DIO REFINANDO/Desafio do Heroi/index.js
-
-• Atividades DIO REFINANDO/Geração de Biomas em um Mundo de Blocos/Descrição.md
-• Atividades DIO REFINANDO/Geração de Biomas em um Mundo de Blocos/index.js
-
-Atividades CURSO EM VIDEO JS
-Pasta com exercícios e práticas do curso de JavaScript – Curso em Vídeo.
-
-Estrutura:
-
-Aulas:
-• Atividades CURSO EM VIDEO JS/aula #04/ex001.html
-• Atividades CURSO EM VIDEO JS/aula #05/ex002.html
-• Atividades CURSO EM VIDEO JS/aula #06/ex003.html
-• Atividades CURSO EM VIDEO JS/aula #06/ex004.html
-• Atividades CURSO EM VIDEO JS/aula #07/ex005.js
-• Atividades CURSO EM VIDEO JS/aula #08/
-• Atividades CURSO EM VIDEO JS/aula #09/ex006.html
-• Atividades CURSO EM VIDEO JS/aula #10/ex007.html
-
-Exercício #1:
-• Atividades CURSO EM VIDEO JS/exercicio #1/modelo.html
-• Atividades CURSO EM VIDEO JS/exercicio #1/script.js
-• Atividades CURSO EM VIDEO JS/exercicio #1/estilo.css
-• Atividades CURSO EM VIDEO JS/exercicio #1/img/manha.png
-• Atividades CURSO EM VIDEO JS/exercicio #1/img/tarde.png
-• Atividades CURSO EM VIDEO JS/exercicio #1/img/noite.png
-
-Exercício #2:
-• Atividades CURSO EM VIDEO JS/exercicio #2/modelo.html
-• Atividades CURSO EM VIDEO JS/exercicio #2/script.js
-• Atividades CURSO EM VIDEO JS/exercicio #2/estilo.css
-• Atividades CURSO EM VIDEO JS/exercicio #2/foto-adulto-m.png
-• Atividades CURSO EM VIDEO JS/exercicio #2/foto-adulto-f.png
-• Atividades CURSO EM VIDEO JS/exercicio #2/foto-jovem-m.png
-• Atividades CURSO EM VIDEO JS/exercicio #2/foto-jovem-f.png
-• Atividades CURSO EM VIDEO JS/exercicio #2/foto-bebe-m.png
-• Atividades CURSO EM VIDEO JS/exercicio #2/foto-bebe-f.png
-• Atividades CURSO EM VIDEO JS/exercicio #2/foto-idoso-m.png
-
-Exercício #3:
-• Atividades CURSO EM VIDEO JS/exercicio #3/modelo.html
-• Atividades CURSO EM VIDEO JS/exercicio #3/script.js
-• Atividades CURSO EM VIDEO JS/exercicio #3/estilo.css
-
-Exercício #4:
-• Atividades CURSO EM VIDEO JS/exercicio #4/modelo.html
-• Atividades CURSO EM VIDEO JS/exercicio #4/script.js
-• Atividades CURSO EM VIDEO JS/exercicio #4/estilo.css
+## Ideias de melhoria
+- Implementar a logica completa em `Atividade Formacao TS/app.ts`.
+- Adicionar exemplos de entrada/saida em cada desafio.
+- Criar scripts utilitarios para testar localmente os desafios que dependem de `gets/print`.
