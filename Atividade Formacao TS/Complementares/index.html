@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Estacionamento</title>
+
+    <style>
+      body {
+        background: #0e0e0e;
+        color: #f5f5f5;
+        font-family: "Segoe UI", system-ui, sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      h1 {
+        font-weight: 300;
+        letter-spacing: 1px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 800px;
+        background: #1b1b1b;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px #0004;
+      }
+
+      .inputs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      input {
+        flex: 1;
+        padding: 10px;
+        border-radius: 6px;
+        border: none;
+        outline: none;
+        background: #2a2a2a;
+        color: white;
+        font-size: 14px;
+      }
+
+      button {
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        background: #4c8fff;
+        color: white;
+        cursor: pointer;
+        transition: 0.2s;
+        font-weight: 600;
+      }
+
+      button:hover {
+        background: #1f6bff;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        border-bottom: 1px solid #333;
+        text-align: left;
+      }
+
+      th {
+        background: #222;
+        font-weight: 500;
+      }
+
+      tr:hover td {
+        background: #1a1a1a;
+      }
+
+      .btn-remover {
+        background: #ff4c4c;
+      }
+
+      .btn-remover:hover {
+        background: #ff1f1f;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Estacionamento</h1>
+
+    <div class="container">
+      <div class="inputs">
+        <input type="text" id="nome" placeholder="Nome do veículo" />
+        <input type="text" id="placa" placeholder="Placa do veículo" />
+        <button id="cadastrar">Cadastrar</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Placa</th>
+            <th>Entrada</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="patio"></tbody>
+      </table>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

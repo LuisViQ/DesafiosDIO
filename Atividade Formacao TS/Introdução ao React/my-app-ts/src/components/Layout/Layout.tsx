@@ -1,9 +1,14 @@
 import { ReactNode } from 'react';
+import { Header } from '../Header/Header';
 
 type LayoutProps = {
   children: ReactNode;
 };
 
 export function Layout({ children }: LayoutProps) {
-  return <>{children}</>;
+  return (<>
+  <Header title="Dio Bank" />
+  {children}
+  </>
+  )
 }

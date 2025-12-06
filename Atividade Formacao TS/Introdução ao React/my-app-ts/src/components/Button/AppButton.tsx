@@ -1,8 +1,9 @@
-import { FC } from 'react';
+import { FC, MouseEventHandler } from 'react';
 import { Button, ButtonProps } from '@chakra-ui/react';
 
 interface AppButtonProps extends ButtonProps {
   label: string;
+  onClick: MouseEventHandler
 }
 
 export const AppButton: FC<AppButtonProps> = ({ label, ...rest }) => {
@@ -12,7 +13,7 @@ export const AppButton: FC<AppButtonProps> = ({ label, ...rest }) => {
       colorScheme="purple"
       borderRadius="full"
       size="md"
-      {...rest} // aqui vem o onClick e o resto
+      {...rest}
     >
       {label}
     </Button>

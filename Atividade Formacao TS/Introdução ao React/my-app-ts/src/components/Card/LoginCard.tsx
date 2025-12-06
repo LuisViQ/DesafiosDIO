@@ -1,13 +1,38 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { Box, Heading, Text, Input } from '@chakra-ui/react';
 import { AppButton } from '../Button/AppButton';
-import { getWelcomeMessage } from '../../utils/welcome';
+import { login } from '../../services/Login';
+import { api } from '../../api';
 
+interface UserData {
+  email:string
+  password:string
+  name?:string
+}
 export const LoginCard: FC = () => {
-  const handleLoginClick = () => {
-    const message = getWelcomeMessage();
-    alert(message);
-  };
+  const [email, setEmail] = useState<string>('')
+  const [senha, setSenha] = useState('')
+  const [userData, setUserData] = useState<null | UserData>()
+
+  useEffect(() =>{
+    const getData = async () => {
+      const data: any | UserData = await api
+      setUserData(data)
+    }
+    
+    getData()
+  }, [])
+  
+
+
+  const displayName = userData?.name ?? "carregando...";
+
+
+  
+  // const handleLoginClick = () => {
+  //   const message = getWelcomeMessage();
+  //   alert(message);
+  // };
 
   return (
     <Box
@@ -29,7 +54,7 @@ export const LoginCard: FC = () => {
       </Heading>
 
       <Text fontSize="sm" textAlign="center" mb="6" color="gray.500">
-        Acesse sua conta para continuar
+        Olá{" "}{displayName}{" "}faça login para continuar
       </Text>
 
       <Box>
@@ -37,17 +62,23 @@ export const LoginCard: FC = () => {
           placeholder="E-mail"
           type="email"
           mb="4"
+          color={'black'}
+          value={email} 
+          onChange={(event) => setEmail(event.target.value)}
         />
 
         <Input
           placeholder="Senha"
           type="password"
+          color={'black'}
           mb="5"
+          value={senha} 
+          onChange={(event) => setSenha(event.target.value)}
         />
 
         <AppButton
           label="Entrar"
-          onClick={handleLoginClick}
+          onClick={() => login(email)}
         />
       </Box>
     </Box>
