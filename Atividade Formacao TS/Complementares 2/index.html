@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gerenciador de Tarefas</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #f0f2f5;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        padding-top: 40px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 500px;
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        color: #444;
+        margin-bottom: 25px;
+      }
+
+      .input-area {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 22px;
+      }
+
+      input,
+      select,
+      button {
+        padding: 12px;
+        font-size: 15px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        outline: none;
+      }
+
+      button {
+        background: #4b72ff;
+        color: white;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+
+      button:hover {
+        background: #3659d4;
+      }
+
+      h2 {
+        margin-bottom: 10px;
+        color: #555;
+        font-size: 20px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      li {
+        background: #f7f7f7;
+        padding: 14px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-left: 5px solid transparent;
+        transition: 0.2s;
+      }
+
+      li:hover {
+        transform: translateX(4px);
+      }
+
+      .priority-baixa {
+        border-color: #4caf50;
+      }
+      .priority-media {
+        border-color: #ffc107;
+      }
+      .priority-alta {
+        border-color: #f44336;
+      }
+
+      .done {
+        text-decoration: line-through;
+        color: #888;
+        background: #e6e6e6;
+      }
+
+      .actions button {
+        background: #15b368;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 13px;
+      }
+
+      .actions button:hover {
+        background: #0e7f4a;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Gerenciador de Tarefas</h1>
+
+      <div class="input-area">
+        <input id="title" type="text" placeholder="Título da tarefa" />
+
+        <select id="priority">
+          <option value="baixa">Prioridade Baixa</option>
+          <option value="media">Prioridade Média</option>
+          <option value="alta">Prioridade Alta</option>
+        </select>
+
+        <button id="addBtn" onclick="adicionarTarefas()">
+          Adicionar Tarefa
+        </button>
+      </div>
+
+      <h2>Minhas Tarefas</h2>
+      <ul id="taskList"></ul>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
