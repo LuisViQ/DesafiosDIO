@@ -1,21 +1,15 @@
 import express, { Request, Response } from 'express'
+import { UserController } from './controllers/UserController'
+import { router } from './routes/user.route'
 
-const db = [
-    {
-        name: 'Luis',
-        email: 'fileps2009@gmail.com'
-    }
-]
 
+const userController = new UserController()
 const server = express()
 
 server.use(express.json())
+server.use(router)
 server.get('/', (request: Request, response: Response) => {
     return response.status(200).json({ message: 'DioBank API'})
 })
-server.post('/user', (request:Request, response:Response) =>{
-    const body = request.body
-    console.log(body)
-    return response.status(201).json({message:'DioBank'})
-}) 
+
 server.listen(5000, () => console.log('Server on'))
