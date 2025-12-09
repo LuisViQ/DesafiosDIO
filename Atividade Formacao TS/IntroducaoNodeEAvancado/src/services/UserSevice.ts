@@ -1,9 +1,4 @@
-const db = [
-    {
-        name: 'Luis',
-        email: 'fileps2009@gmail.com'
-    }
-];
+import { db } from "../database/database";
 
 export class UserSevice {
     createUser = (name: string, email: string) => {
