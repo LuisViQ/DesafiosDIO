@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { UserSevice } from "../services/UserSevice";
+import { UserService } from "../services/UserSevice";
 
-const userService = new UserSevice();
+const userService = new UserService();
 
 export class UserController {
     
@@ -18,13 +18,18 @@ export class UserController {
                 .status(400)
                 .json({ message: 'Bad request! Email is not to be null' });
         }
+        if (!user.password) {
+            return response
+                .status(400)
+                .json({ message: 'Bad request! Password is not to be null' });
+        }
 
-        userService.createUser(user.name, user.email);
+        userService.createUser(user.name, user.email, user.password);
         return response.status(201).json({ message: 'DioBank' });
     };
 
-    getAllUsers = (request: Request, response: Response) => {
-        const users = userService.getAllUsers();
+    getUser = (request: Request, response: Response) => {
+        const users = userService.getUser();
         return response.status(200).json(users);
     };
     deleteUsers = (request: Request, response: Response) => {
