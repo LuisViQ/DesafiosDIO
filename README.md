@@ -1,6 +1,6 @@
-# Estudos em JavaScript e TypeScript
+# Estudos em JavaScript, TypeScript e React Native
 
-Colecao de exercicios e desafios resolvidos durante cursos e trilhas na DIO e no Curso em Video. Cada pasta e independente e pode ser explorada separadamente.
+Colecao de exercicios e desafios resolvidos durante cursos e trilhas na DIO, no Curso em Video e na Formacao React Native. Cada pasta e independente e pode ser explorada separadamente.
 
 ## Estrutura
 - `Atividade Formacao TS/`
@@ -9,6 +9,12 @@ Colecao de exercicios e desafios resolvidos durante cursos e trilhas na DIO e no
   - `Complementares 2/`: lista de tarefas com prioridade em TS (`app.ts/js` + `index.html`).
   - `IntroducaoNodeEAvancado/`: API Express + TypeORM + SQLite para CRUD basico de usuarios.
   - `Introducao ao React/my-app-ts/`: app React + TypeScript com layout e rotas `Home`/`Conta`.
+- `Atividade Formacao React Native/`
+  - `introduicaoaoreactnative/`: toggle on/off com imagens e StatusBar dinamica.
+  - `aula-states/`: contador simples usando `useReducer`.
+  - `bat-help/`: tela do Bat Sinal com formulario de contato.
+  - `bat-pass-app/`: gerador de senha com copia para clipboard.
+  - `react-nav/`: portfolio mobile com React Navigation (Home/Contato), cards e links externos, com `eas.json` para build.
 - `Atividades JS ES6/`: exemplos de async/await e `fetch` consumindo `data.json` direto no navegador via `index.html`.
 - `Atividades DIO AULAS/`
   - `Desafio1/`: ranking de heroi por XP.
@@ -51,6 +57,15 @@ Colecao de exercicios e desafios resolvidos durante cursos e trilhas na DIO e no
   ```
 
 - **Complementares (1 e 2)**: abra o `index.html` de cada pasta em um servidor estatico simples (ex.: `npx http-server .`) para testar o estacionamento e a lista de tarefas.
+
+### React Native / Expo
+- **Apps React Native (Expo)**
+  ```bash
+  cd "Atividade Formacao React Native/react-nav"
+  npm install
+  npm start
+  ```
+  Use o Expo Go ou um emulador. Para outros apps, troque o caminho por `bat-help`, `bat-pass-app`, `aula-states` ou `introduicaoaoreactnative`.
 
 ### Navegador (ES6 e Curso em Video)
 - **Exemplos ES6**
