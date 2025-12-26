@@ -4,8 +4,8 @@ import { styles } from "./styles";
 import { openExternalLink } from "../utils/openExternalLink";
 
 import { OutLineButton } from "./OutLineButton";
+import { gitHubLink } from "../constants/externalsLinks";
 export function HighlightsCard() {
-  const url = "https://github.com/LuisViQ";
   return (
     <>
       <Text style={styles.sectionTitle}>Em destaque</Text>
@@ -16,7 +16,7 @@ export function HighlightsCard() {
         </Text>
 
         <OutLineButton
-          onPress={() => openExternalLink(url)}
+          onPress={() => openExternalLink(gitHubLink)}
           text="Explorar projetos"
         />
       </View>

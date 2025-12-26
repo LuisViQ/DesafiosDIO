@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Image } from "react-native";
+import { gitHubImageLink } from "../constants/externalsLinks";
 
 export function UserImage() {
   const [hasError, setHasError] = useState(false);
@@ -7,7 +8,7 @@ export function UserImage() {
 
   useEffect(() => {
     const cacheBuster = Date.now();
-    setUri(`https://github.com/LuisViQ.png?cb=${cacheBuster}`);
+    setUri(`${gitHubImageLink}${cacheBuster}`);
   }, []);
 
   return (

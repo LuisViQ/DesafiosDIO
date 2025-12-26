@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, Alert } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 import { styles } from "./Styles";
@@ -10,9 +10,20 @@ import { MainCard } from "../components/MainCard";
 import { useNavigationActions } from "../hooks/useNavigationActions";
 import { BlackButton } from "../components/BlackButton";
 import { OutLineButton } from "../components/OutLineButton";
-
+import {
+  emailLink,
+  linkedinLink,
+  whatsAppLink,
+} from "../constants/externalsLinks";
+import * as Clipboard from "expo-clipboard";
 export function ContScreen() {
   const { goToHome } = useNavigationActions();
+  const addEmailToClipboard = async (email: string) => {
+    Alert.alert("Área de transferência", `Email copiado com sucesso.`, [
+      { text: "OK" },
+    ]);
+    await Clipboard.setStringAsync(email);
+  };
   return (
     <View style={styles.page}>
       <StatusBar style="light" />
@@ -50,21 +61,17 @@ export function ContScreen() {
         <View style={styles.contactButtons}>
           <BlackButton
             title="WhatsApp"
-            onPress={() => openExternalLink("https://wa.me/5599985049958")}
+            onPress={() => openExternalLink(whatsAppLink)}
             showArrow={false}
           />
           <BlackButton
             title="Linkedin"
-            onPress={() =>
-              openExternalLink(
-                "https://www.linkedin.com/in/luis-felipe-viana-queiroz-089720263/"
-              )
-            }
+            onPress={() => openExternalLink(linkedinLink)}
             showArrow={false}
           />
           <OutLineButton
             text="Email"
-            onPress={() => openExternalLink("mailto:fileps2009@outlook.com")}
+            onPress={() => addEmailToClipboard(emailLink)}
           />
         </View>
         <Text style={styles.contactHint}>

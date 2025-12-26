@@ -1,0 +1,5 @@
+export const gitHubLink = "https://github.com/LuisViQ"
+export const whatsAppLink = "https://wa.me/5599985049958" 
+export const linkedinLink = "https://www.linkedin.com/in/luis-felipe-viana-queiroz-089720263/"
+export const emailLink = "fileps2009@outlook.com"
+export const gitHubImageLink = "https://github.com/LuisViQ.png?cb="
