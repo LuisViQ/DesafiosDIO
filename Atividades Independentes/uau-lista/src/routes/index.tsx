@@ -1,12 +1,13 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { StackRoutes } from "./stack.routes";
-import { createStackNavigator } from "@react-navigation/stack";
-const StackA = createStackNavigator();
+import LoginContextProvider from "../contexts/loginContext";
 
 export function Routes() {
   return (
     <NavigationContainer>
-      <StackRoutes />
+      <LoginContextProvider>
+        <StackRoutes />
+      </LoginContextProvider>
     </NavigationContainer>
   );
 }

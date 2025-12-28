@@ -11,7 +11,6 @@ export default async function handleLogin (username: string, password:string) {
   });
 
   const data = await res.json();
-
   if (!res.ok) {
     // dummyjson costuma mandar { message: "..." } em erro
     throw new Error(data?.message ?? "Falha no login");

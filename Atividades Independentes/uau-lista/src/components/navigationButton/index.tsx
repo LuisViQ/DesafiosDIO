@@ -5,7 +5,7 @@ import { styles } from "./styles";
 import { useNavigationActions } from "../../hooks/useNavigationActions";
 
 type NavigationButtonProps = {
-  where: "home" | "productDetails" | "myList";
+  where: "home" | "productDetails" | "myList" | "login";
   label?: string;
 };
 
@@ -16,6 +16,7 @@ export function NavigationButton({ where, label }: NavigationButtonProps) {
     home: navigation.goToHome,
     productDetails: navigation.goToProductDetails,
     myList: navigation.goToMyList,
+    login: navigation.goToLogin,
   } as const;
 
   const handlePress = actions[where];

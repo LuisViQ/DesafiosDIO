@@ -7,6 +7,10 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignSelf: "center",
   },
+  passwordRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   input: {
     height: 40,
     margin: 12,
