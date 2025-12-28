@@ -5,6 +5,9 @@ import { useState } from "react";
 export default function App() {
   const [type, setType] = useState<CameraType>("back");
   const [permission, setPermission] = useCameraPermissions();
+  const [count, setCount] = useState(0);
+
+  console.log(count);
   return (
     <View style={styles.container}>
       <CameraView style={{ flex: 1 }} facing={type} ratio="16:9" zoom={0}>
