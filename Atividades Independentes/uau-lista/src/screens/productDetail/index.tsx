@@ -1,13 +1,13 @@
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Text, View } from "react-native";
 
 import { styles } from "./styles";
 import { NavigationButton } from "../../components/navigationButton";
 
-export function HomeScreen() {
+export function ProductDetail() {
   return (
     <View style={styles.container}>
-      <NavigationButton where="productDetails" />
+      <Text>Teste</Text>
     </View>
   );
 }
