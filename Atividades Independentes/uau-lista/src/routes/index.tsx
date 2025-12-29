@@ -3,6 +3,7 @@ import { StackRoutes } from "./stack.routes";
 import LoginContextProvider from "../contexts/loginContext";
 import ProductsContextProvider from "../contexts/productsContext";
 import SingleProductsContextProvider from "../contexts/singleProductContext";
+import { CartProvider } from "../contexts/card";
 
 export function Routes() {
   return (
@@ -10,7 +11,9 @@ export function Routes() {
       <LoginContextProvider>
         <ProductsContextProvider>
           <SingleProductsContextProvider>
-            <StackRoutes />
+            <CartProvider>
+              <StackRoutes />
+            </CartProvider>
           </SingleProductsContextProvider>
         </ProductsContextProvider>
       </LoginContextProvider>

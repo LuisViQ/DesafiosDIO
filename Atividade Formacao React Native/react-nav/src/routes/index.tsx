@@ -5,6 +5,7 @@ export function Routes() {
   return (
     <NavigationContainer>
       <StackRoutes />
+      
     </NavigationContainer>
   );
 }

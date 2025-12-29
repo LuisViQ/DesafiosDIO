@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, View, Text } from "react-native";
+import { Pressable, Text } from "react-native";
 
 import { styles } from "./styles";
 import { useNavigationActions } from "../../hooks/useNavigationActions";
@@ -22,10 +22,8 @@ export function NavigationButton({ where, label }: NavigationButtonProps) {
   const handlePress = actions[where];
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={handlePress}>
-        <Text style={styles.textButton}>{label ?? `Ir para ${where}`}</Text>
-      </TouchableOpacity>
-    </View>
+    <Pressable onPress={handlePress} style={styles.container}>
+      <Text style={styles.textButton}>{label ?? `Ir para ${where}`}</Text>
+    </Pressable>
   );
 }

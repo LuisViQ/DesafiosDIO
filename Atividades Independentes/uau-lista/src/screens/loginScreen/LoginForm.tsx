@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, TextInput, View } from "react-native";
+import { Pressable, Text, TextInput, View } from "react-native";
 
 import { styles } from "./styles";
 
@@ -23,27 +23,37 @@ export function LoginForm({
   onSubmit,
 }: LoginFormProps) {
   return (
-    <View>
+    <View style={styles.form}>
+      <Text style={styles.label}>Usuario</Text>
       <TextInput
-        placeholder="Username"
+        placeholder="Digite seu usuario"
+        placeholderTextColor="#a18978"
         style={styles.input}
         value={username}
         onChangeText={onChangeUsername}
       />
+      <Text style={styles.label}>Senha</Text>
       <View style={styles.passwordRow}>
         <TextInput
-          placeholder="Senha"
+          placeholder="Digite sua senha"
+          placeholderTextColor="#a18978"
           style={styles.input}
           secureTextEntry={isPasswordHidden}
           value={password}
           onChangeText={onChangePassword}
         />
-        <Button
-          title={isPasswordHidden ? "Esconder Senha" : "Ver Senha"}
+        <Pressable
+          style={styles.toggleButton}
           onPress={onTogglePasswordVisibility}
-        />
+        >
+          <Text style={styles.toggleButtonText}>
+            {isPasswordHidden ? "Mostrar" : "Ocultar"}
+          </Text>
+        </Pressable>
       </View>
-      <Button title="Entrar" onPress={onSubmit} />
+      <Pressable style={styles.submitButton} onPress={onSubmit}>
+        <Text style={styles.submitButtonText}>Entrar</Text>
+      </Pressable>
     </View>
   );
 }

@@ -24,17 +24,28 @@ export function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      <Text>Tela de Login</Text>
-      <LoginForm
-        username={username}
-        password={password}
-        isPasswordHidden={isPasswordHidden}
-        onChangeUsername={setUsername}
-        onChangePassword={setPassword}
-        onTogglePasswordVisibility={togglePasswordVisibility}
-        onSubmit={handleSubmit}
-      />
-      <NavigationButton where="home" />
+      <View pointerEvents="none" style={styles.background}>
+        <View style={[styles.blob, styles.blobOne]} />
+        <View style={[styles.blob, styles.blobTwo]} />
+      </View>
+      <View style={styles.header}>
+        <Text style={styles.brand}>Uau Lista</Text>
+        <Text style={styles.tagline}>
+          Organize suas compras com um toque elegante.
+        </Text>
+      </View>
+      <View style={styles.card}>
+        <LoginForm
+          username={username}
+          password={password}
+          isPasswordHidden={isPasswordHidden}
+          onChangeUsername={setUsername}
+          onChangePassword={setPassword}
+          onTogglePasswordVisibility={togglePasswordVisibility}
+          onSubmit={handleSubmit}
+        />
+      </View>
+      <NavigationButton where="home" label="Entrar sem conta" />
     </View>
   );
 }
