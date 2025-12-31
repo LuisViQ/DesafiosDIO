@@ -70,10 +70,8 @@ export const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#f1e4d6",
 
-    // sombra Android
     elevation: 6,
 
-    // sombra iOS
     shadowColor: "#3a2a20",
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.18,
@@ -99,13 +97,30 @@ export const styles = StyleSheet.create({
 
   input: {
     flex: 1,
-    height: 46,
+    height: 45,
     borderWidth: 1,
-    paddingHorizontal: 12,
+    paddingHorizontal: 14,
     borderColor: "#ead9c6",
     borderRadius: 14,
     color: "#2d221b",
-    fontSize: 15,
+    fontSize: 16,
+    fontFamily: bodyFont,
+    backgroundColor: "#fff7ec",
+  },
+  user: {
+    flex: 1,
+    width: "100%",
+    height: 60,
+    borderWidth: 1,
+    paddingHorizontal: 18,
+    paddingVertical: 0,
+    borderColor: "#ead9c6",
+    borderRadius: 14,
+    color: "#2d221b",
+    fontSize: 18,
+    lineHeight: 22,
+    textAlignVertical: "center",
+    includeFontPadding: false,
     fontFamily: bodyFont,
     backgroundColor: "#fff7ec",
   },

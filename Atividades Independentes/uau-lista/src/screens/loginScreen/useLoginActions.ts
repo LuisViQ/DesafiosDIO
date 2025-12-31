@@ -27,7 +27,7 @@ export function useLoginActions() {
     } catch (error: unknown) {
       const message =
         error instanceof Error ? error.message : "Erro desconhecido";
-      console.log("Erro:", message);
+      alert(message);
     }
   };
 

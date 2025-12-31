@@ -45,7 +45,6 @@ export function LoginScreen() {
           onSubmit={handleSubmit}
         />
       </View>
-      <NavigationButton where="home" label="Entrar sem conta" />
     </View>
   );
 }

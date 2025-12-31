@@ -28,7 +28,7 @@ export function LoginForm({
       <TextInput
         placeholder="Digite seu usuario"
         placeholderTextColor="#a18978"
-        style={styles.input}
+        style={styles.user}
         value={username}
         onChangeText={onChangeUsername}
       />

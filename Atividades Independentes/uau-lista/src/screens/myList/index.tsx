@@ -3,6 +3,7 @@ import { FlatList, Image, Pressable, Text, View } from "react-native";
 
 import { styles } from "./styles";
 import { useCart } from "../../contexts/card";
+import { useNavigation } from "@react-navigation/native";
 
 export function MyList() {
   const {
@@ -14,7 +15,7 @@ export function MyList() {
     removeItem,
     clearCart,
   } = useCart();
-
+  const navigation = useNavigation<any>();
   return (
     <View style={styles.container}>
       <View pointerEvents="none" style={styles.background}>
@@ -34,6 +35,12 @@ export function MyList() {
             <Pressable style={styles.clearButton} onPress={clearCart}>
               <Text style={styles.clearButtonText}>Limpar</Text>
             </Pressable>
+            <Pressable
+              onPress={() => navigation.goBack()}
+              style={styles.backButton}
+            >
+              <Text style={styles.backText}>Voltar</Text>
+            </Pressable>
           </View>
         }
         ListEmptyComponent={
@@ -48,9 +55,7 @@ export function MyList() {
               <Text style={styles.itemTitle} numberOfLines={2}>
                 {item.title}
               </Text>
-              <Text style={styles.itemPrice}>
-                R$ {item.price.toFixed(2)}
-              </Text>
+              <Text style={styles.itemPrice}>R$ {item.price.toFixed(2)}</Text>
               <View style={styles.qtyRow}>
                 <Pressable
                   style={styles.qtyButton}

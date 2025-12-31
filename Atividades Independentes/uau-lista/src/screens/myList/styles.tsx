@@ -208,4 +208,16 @@ export const styles = StyleSheet.create({
     fontFamily: headingFont,
     color: "#2a9d8f",
   },
+  backButton: {
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+    borderRadius: 999,
+    backgroundColor: "#efe2d4",
+  },
+  backText: {
+    fontFamily: headingFont,
+    fontSize: 12,
+    color: "#6f5646",
+    letterSpacing: 0.4,
+  },
 });
