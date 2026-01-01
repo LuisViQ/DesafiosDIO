@@ -14,6 +14,7 @@ import { styles } from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import * as FileSystem from "expo-file-system/legacy";
 import * as ImagePicker from "expo-image-picker";
+import Geolocation from "@react-native-community/geolocation";
 
 export function Home() {
   const [changeColor, setChangeColor] = useState(true);
@@ -120,6 +121,12 @@ export function Home() {
       </>
     );
   };
+  const getGeoLocation = () => {
+    const permissionResult = Geolocation.requestAuthorization;
+    if (!permissionResult) {
+      console.log("Posição permitida");
+    }
+  };
   return (
     <View style={styles.container}>
       <Text>
@@ -146,6 +153,7 @@ export function Home() {
       <Button title="Pick an image from camera roll" onPress={pickImage} />
       {image && <Image source={{ uri: image }} style={styles.image} />}
       {imgLink && <ImgDownloaded />}
+      <Button title="Ver localização" onPress={getGeoLocation} />
     </View>
   );
 }
