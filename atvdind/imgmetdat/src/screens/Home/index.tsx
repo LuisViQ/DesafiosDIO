@@ -1,189 +1,90 @@
-import React, { useEffect, useState } from "react";
+﻿import React, { useEffect, useState } from "react";
 import {
-  Button,
+  Platform,
+  ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
-  View,
-  Platform,
-  Alert,
-  Image,
-  PermissionsAndroid,
 } from "react-native";
 import * as Device from "expo-device";
-import { styles } from "./styles";
 import { Ionicons } from "@expo/vector-icons";
-import * as FileSystem from "expo-file-system/legacy";
-import * as ImagePicker from "expo-image-picker";
-import geolocation from "@react-native-community/geolocation";
-type Local = {
-  latitude: number;
-  longitude: number;
-  altitude: number | null;
-  accuracy: number;
-  altitudeAccuracy: number | null;
-  heading: number | null;
-  speed: number | null;
-};
+import { styles } from "./styles";
+import { PrimaryButton } from "../../components/PrimaryButton";
+import { ImagePreview } from "../../components/ImagePreview";
+import { LocationMap } from "../../components/LocationMap";
+import { downloadImage } from "../../services/file/downloadImage";
+import { pickImage } from "../../services/media/pickImage";
+import { getCurrentLocation } from "../../services/location/getCurrentLocation";
+import { validateUrl } from "../../utils/validateUrl";
+import type { Local } from "../../types/location";
+
 export function Home() {
   const [changeColor, setChangeColor] = useState(true);
   const [linkValue, setLinkValue] = useState("");
   const [image, setImage] = useState<string | null>(null);
-  const [imgLink, setImgLink] = useState<string | null>();
-  const [local, setLocal] = useState<Local>();
+  const [imgLink, setImgLink] = useState<string | null>(null);
+  const [local, setLocal] = useState<Local | null>(null);
+  const [viewMap, setViewMap] = useState(false);
+
+  const changeVisibilityMap = () => {
+    setViewMap((prev) => !prev);
+  };
+
   const handleLinkValue = (text: string) => {
     setLinkValue(text);
-  };
-  const handleChangeColorAndSave = () => {
-    setChangeColor(!changeColor);
-    saveFile();
   };
 
   const saveFile = async () => {
     try {
-      if (!linkValue.startsWith("http")) {
-        console.log("Link inválido");
+      if (!validateUrl(linkValue)) {
+        console.log("Invalid link");
         return;
       }
 
-      const tempUri =
-        (FileSystem.cacheDirectory ?? FileSystem.documentDirectory) +
-        "file.png";
-      if (!tempUri) {
-        console.log("Sem diretório disponível pra salvar temporariamente.");
-        return;
+      const downloadedUri = await downloadImage(linkValue.trim());
+      if (downloadedUri) {
+        setImgLink(downloadedUri);
       }
-
-      const download = await FileSystem.downloadAsync(linkValue, tempUri);
-
-      // 2) ANDROID: pede pasta e salva lá (escolha Downloads no seletor)
-      if (Platform.OS === "android") {
-        const perm =
-          await FileSystem.StorageAccessFramework.requestDirectoryPermissionsAsync();
-
-        if (!perm.granted) {
-          console.log("Permissão negada");
-          return;
-        }
-
-        const destUri = await FileSystem.StorageAccessFramework.createFileAsync(
-          perm.directoryUri,
-          "file.png",
-          "image/png"
-        );
-
-        const base64 = await FileSystem.readAsStringAsync(download.uri, {
-          encoding: FileSystem.EncodingType.Base64,
-        });
-
-        await FileSystem.writeAsStringAsync(destUri, base64, {
-          encoding: FileSystem.EncodingType.Base64,
-        });
-        setImgLink(download.uri);
-
-        return;
-      }
-      // 3) iOS: não existe Downloads público; fica no sandbox do app
-      console.log("iOS: salvo no app:", download.uri);
-    } catch (e) {
-      console.log("Erro:", e);
+    } catch (error) {
+      console.log("Erro:", error);
     }
   };
 
-  const pickImage = async () => {
-    // No permissions request is necessary for launching the image library.
-    // Manually request permissions for videos on iOS when `allowsEditing` is set to `false`
-    // and `videoExportPreset` is `'Passthrough'` (the default), ideally before launching the picker
-    // so the app users aren't surprised by a system dialog after picking a video.
-    // See "Invoke permissions for videos" sub section for more details.
-    const permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
+  const handleChangeColorAndSave = async () => {
+    setChangeColor((prev) => !prev);
+    await saveFile();
+  };
 
-    if (!permissionResult.granted) {
-      Alert.alert(
-        "Permission required",
-        "Permission to access the media library is required."
-      );
-      return;
-    }
-
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ["images", "videos"],
-      allowsEditing: true,
-      aspect: [16, 9],
-      quality: 1,
-    });
-
-    console.log(result);
-
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
+  const handlePickImage = async () => {
+    const uri = await pickImage();
+    if (uri) {
+      setImage(uri);
     }
   };
-  const ImgDownloaded = () => {
-    if (!imgLink) return null;
 
-    return (
-      <>
-        <Image source={{ uri: imgLink }} style={styles.image} />
-        <Text>Imagem baixada pelo link</Text>
-      </>
-    );
-  };
-  async function requestLocationPermission() {
-    if (Platform.OS === "android") {
-      try {
-        const granted = await PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-          {
-            title: "Permissão de Localização",
-            message: "Este app precisa acessar sua localização.",
-            buttonNeutral: "Me Pergunte Depois",
-            buttonNegative: "Cancelar",
-            buttonPositive: "OK",
-          }
-        );
-        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-          console.log("Permissão concedida");
-          return true;
-        } else {
-          console.log("Permissão negada");
-          return false;
-        }
-      } catch (err) {
-        console.warn(err);
-        return false;
-      }
-    }
-    return true; // iOS já lida com o Info.plist
-  }
   useEffect(() => {
-    requestLocationPermission().then((hasPermission) => {
-      if (hasPermission) {
-        geolocation.getCurrentPosition(
-          (position) => {
-            setLocal(position.coords);
-            console.log(position);
-          },
-          (error) => {
-            console.log(error.code, error.message);
-          },
-          { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-        );
+    getCurrentLocation().then((coords) => {
+      if (coords) {
+        setLocal(coords);
       }
     });
   }, []);
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.content}
+      keyboardShouldPersistTaps="handled"
+    >
       <Text>
-        Seu dispositivo é um: {Device.modelName} e o nome dele é:{" "}
+        Seu dispositivo e um: {Device.modelName} e o nome dele e:{" "}
         {Device.deviceName ?? "desconhecido"}
       </Text>
 
       <TextInput
         placeholder="Digite o link do arquivo que deseja baixar"
-        style={{ color: "red", borderColor: "black", borderWidth: 1 }}
+        style={styles.input}
+        placeholderTextColor="black"
         value={linkValue}
         onChangeText={handleLinkValue}
       />
@@ -194,18 +95,29 @@ export function Home() {
         {changeColor ? (
           <Ionicons name="checkmark-circle" size={32} color="green" />
         ) : (
-          <Ionicons name="checkmark-circle-outline" color="#000" size={32} />
+          <Ionicons name="checkmark-circle-outline" size={32} color="#000" />
         )}
       </TouchableOpacity>
-      <Button title="Pick an image from camera roll" onPress={pickImage} />
-      {image && <Image source={{ uri: image }} style={styles.image} />}
-      {imgLink && <ImgDownloaded />}
-      <Button title="Ver localização" onPress={requestLocationPermission} />
-      {local && (
-        <Text>
-          Lat: {local.latitude} | Long: {local.longitude}
-        </Text>
+
+      <PrimaryButton
+        title="Mostrar imagem da sua galeria"
+        onPress={handlePickImage}
+      />
+
+      {image && <ImagePreview uri={image} caption="Imagem da galeria" />}
+      {imgLink && (
+        <ImagePreview uri={imgLink} caption="Imagem baixada pelo link" />
       )}
-    </View>
+
+      <PrimaryButton
+        title={viewMap ? "Esconder mapa" : "Ver localizacao"}
+        onPress={changeVisibilityMap}
+        disabled={!local}
+      />
+
+      <Text>local: {local ? "OK" : "NAO"}</Text>
+
+      {viewMap && local && <LocationMap location={local} />}
+    </ScrollView>
   );
 }
