@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Text,
@@ -8,20 +8,29 @@ import {
   Platform,
   Alert,
   Image,
+  PermissionsAndroid,
 } from "react-native";
 import * as Device from "expo-device";
 import { styles } from "./styles";
 import { Ionicons } from "@expo/vector-icons";
 import * as FileSystem from "expo-file-system/legacy";
 import * as ImagePicker from "expo-image-picker";
-import Geolocation from "@react-native-community/geolocation";
-
+import geolocation from "@react-native-community/geolocation";
+type Local = {
+  latitude: number;
+  longitude: number;
+  altitude: number | null;
+  accuracy: number;
+  altitudeAccuracy: number | null;
+  heading: number | null;
+  speed: number | null;
+};
 export function Home() {
   const [changeColor, setChangeColor] = useState(true);
   const [linkValue, setLinkValue] = useState("");
   const [image, setImage] = useState<string | null>(null);
   const [imgLink, setImgLink] = useState<string | null>();
-
+  const [local, setLocal] = useState<Local>();
   const handleLinkValue = (text: string) => {
     setLinkValue(text);
   };
@@ -121,12 +130,50 @@ export function Home() {
       </>
     );
   };
-  const getGeoLocation = () => {
-    const permissionResult = Geolocation.requestAuthorization;
-    if (!permissionResult) {
-      console.log("Posição permitida");
+  async function requestLocationPermission() {
+    if (Platform.OS === "android") {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+          {
+            title: "Permissão de Localização",
+            message: "Este app precisa acessar sua localização.",
+            buttonNeutral: "Me Pergunte Depois",
+            buttonNegative: "Cancelar",
+            buttonPositive: "OK",
+          }
+        );
+        if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+          console.log("Permissão concedida");
+          return true;
+        } else {
+          console.log("Permissão negada");
+          return false;
+        }
+      } catch (err) {
+        console.warn(err);
+        return false;
+      }
     }
-  };
+    return true; // iOS já lida com o Info.plist
+  }
+  useEffect(() => {
+    requestLocationPermission().then((hasPermission) => {
+      if (hasPermission) {
+        geolocation.getCurrentPosition(
+          (position) => {
+            setLocal(position.coords);
+            console.log(position);
+          },
+          (error) => {
+            console.log(error.code, error.message);
+          },
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        );
+      }
+    });
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text>
@@ -153,7 +200,12 @@ export function Home() {
       <Button title="Pick an image from camera roll" onPress={pickImage} />
       {image && <Image source={{ uri: image }} style={styles.image} />}
       {imgLink && <ImgDownloaded />}
-      <Button title="Ver localização" onPress={getGeoLocation} />
+      <Button title="Ver localização" onPress={requestLocationPermission} />
+      {local && (
+        <Text>
+          Lat: {local.latitude} | Long: {local.longitude}
+        </Text>
+      )}
     </View>
   );
 }
