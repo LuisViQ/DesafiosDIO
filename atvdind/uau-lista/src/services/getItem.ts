@@ -1,5 +1,6 @@
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
 export default async function getItem () {
- const res = await fetch("https://dummyjson.com/products", {
+ const res = await fetch(`${API_URL}products`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });

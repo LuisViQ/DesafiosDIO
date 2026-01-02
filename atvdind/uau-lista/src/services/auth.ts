@@ -1,5 +1,6 @@
+const API_URL = process.env.EXPO_PUBLIC_API_URL;
 export default async function handleLogin (username: string, password:string) {
- const res = await fetch("https://dummyjson.com/auth/login", {
+ const res = await fetch(`${API_URL}auth/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

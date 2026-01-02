@@ -12,7 +12,7 @@ Repositório de estudos organizado por trilhas. Aqui tem desafios rápidos, mini
 - **Dio Bank (TS)**: classes, herança e regras de negócio simples.
 - **API Node + TypeORM**: CRUD com SQLite e migrations.
 - **React + TS**: app com rotas e layout base.
-- **React Native (Expo)**: portfólio mobile, gerador de senha, tela Bat-Sinal.
+- **React Native (Expo)**: portfólio mobile, gerador de senha, tela Bat-Sinal, atividades independentes.
 
 ## Mapa rápido
 | Pasta | O que é | Como executar |
